@@ -1,0 +1,61 @@
+
+  class User {
+    #password;
+    constructor(name, userName, password) {
+      this.name = name;
+      this.userName = userName;
+      this.#password = password;
+    }
+
+    #validateEmail(userName) {
+      // check email is valid or not.
+      return true;
+    }
+  
+  
+    login(userName, password) {
+      if (userName === this.userName && password === this.#password) {
+        console.log('Login Successfully');
+      } else {
+        console.log('Authentication Failed!!');
+      }
+    }
+  
+    setPassword(newPassword) {
+      this.#password = newPassword;
+    }
+  }
+
+  class Author extends User {
+    #numOfPost;
+  
+    constructor(name, userName, password) {
+      super(name, userName, password);
+      this.#numOfPost = 0;
+    }
+  
+    createPost(content) {
+      // add content to your DB. :)
+      this.#numOfPost++;
+    }
+
+    getNumOfPost() {
+      return this.#numOfPost;
+    }
+  
+  }
+  
+  
+  const t = new  Author('Siyayoudeen', 'Siya', 'holidays');
+  
+  t.login('Siya', 'holidays'); // Login Successfully
+  t.createPost('leave your feedback :)');
+  console.log(t.getNumOfPost());
+ 
+  console.log(t.name); // Siyayoudeen
+  console.log(t.password); // undefined
+  // console.log(nehal.#password); // Syntax Error
+
+  t.setPassword('moreholidays');
+  t.login('Siya', 'holidays'); // Authentication Failed!!
+  t.login('Siya', 'moreholidays'); // Login Successfully
