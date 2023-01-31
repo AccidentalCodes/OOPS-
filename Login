@@ -6,12 +6,7 @@
       this.userName = userName;
       this.#password = password;
     }
-
-    #validateEmail(userName) {
-      // check email is valid or not.
-      return true;
-    }
-  
+   
   
     login(userName, password) {
       if (userName === this.userName && password === this.#password) {
@@ -21,12 +16,44 @@
       }
     }
   
-    setPassword(newPassword) {
+    setPassword(newPassword) {  //Encapsulation
       this.#password = newPassword;
+    }
+
+    
+    getNationality(Nationality){
+      this.Nationality= Nationality
+  }   
+
+  #isInidan(Nationality) { //abstraction
+    // check Nationality
+    let d = "Indian"
+    if(d===this.Nationality){
+        return true;
+    }
+    else
+    {
+      return false
     }
   }
 
-  class Author extends User {
+  showNationality()
+  {   
+      if(this.#isInidan()){
+          return' You are an Indian'
+      }
+      else{
+        return 'You are not an Indian'
+      }
+  }
+
+    cartInfor(){
+      return' Your cart is empty'
+    }
+
+  }
+
+  class Author extends User { 
     #numOfPost;
   
     constructor(name, userName, password) {
@@ -42,13 +69,20 @@
     getNumOfPost() {
       return this.#numOfPost;
     }
+    
+    cartInfor(){ // Method over riding - polymorphism
+      return' You have one item in your cart'
+    }
   
   }
   
-  
+  const u= new User();
+  u.getNationality('African'); 
+  console.log(u.showNationality()); // You are not an Indian
   const t = new  Author('Siyayoudeen', 'Siya', 'holidays');
   
   t.login('Siya', 'holidays'); // Login Successfully
+  t.createPost('leave your feedback :)');
   t.createPost('leave your feedback :)');
   console.log(t.getNumOfPost());
  
@@ -59,3 +93,11 @@
   t.setPassword('moreholidays');
   t.login('Siya', 'holidays'); // Authentication Failed!!
   t.login('Siya', 'moreholidays'); // Login Successfully
+ console.log( t.cartInfor());
+console.log(u.cartInfor());
+
+
+
+
+
+
